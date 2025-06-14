@@ -23,6 +23,10 @@ metadata:
 spec:
   template:
     spec:
+      taints:
+        - key: CriticalAddonsOnly
+          value: "true"
+          effect: NoSchedule
       nodeClassRef:
         group: karpenter.k8s.aws
         kind: EC2NodeClass
@@ -40,6 +44,7 @@ spec:
         - key: "karpenter.k8s.aws/instance-generation"
           operator: Gt
           values: ["2"]
+        
   limits:
     cpu: 1000
   disruption:

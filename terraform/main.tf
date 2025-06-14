@@ -48,7 +48,7 @@ module "eks" {
   cluster_endpoint_public_access = true
 
   cluster_addons = {
-    # coredns                = {}
+    coredns                = {}
     kube-proxy             = {}
     vpc-cni                = {}
     eks-pod-identity-agent = {}
@@ -121,4 +121,5 @@ resource "helm_release" "karpenter" {
       repository_password
     ]
   }
+  depends_on = [ module.network,module.eks,module.karpenter,aws_security_group.karpenter_devops_sg ]
 }
